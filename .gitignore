@@ -19,8 +19,8 @@
 *.fdb_latexmk
 *.snm
 *.nav
+*.synctex.gz
 comment.cut
-sample-acmsmall.synctex.gz
 
 *.pdf
 !thai-text/*.pdf

@@ -21,7 +21,7 @@
     Hunspell & 2-Stage & 0.8598 \\
     \midrule
     Ours & 2-Stage & 0.9274 \\
-    Ours (SentencePiece) & 2-Stage & 0.9326 \\
+    Ours (SentencePiece) & 2-Stage & \textbf{0.9326} \\
     % Ours (SentencePiece + Tuned Detection) & 2-Stage & 0.9329 \\
     Ours (Oracle Detection) & 2-Stage & 0.9490 \\
     Ours (SentencePiece + Oracle Detection) & 2-Stage & 0.9533 \\
@@ -30,13 +30,11 @@
   \label{tab:e2e_ugwc}
 \end{table}
 
-Our approach was evaluated on two tasks: error correction on our Thai UGWC dataset, and error correction on the English Conll 2014 GEC task. With the Conll 2014 GEC task chosen for its ease of access to other researchers as the Thai UGWC dataset is not publicly available.
+Our approach was evaluated on two tasks: error correction on our Thai UGWC dataset, and error correction on the English Conll 2014 GEC task.
 
 \subsection{Thai UGWC}
 
-The results on the Thai UGWC are shown in Table~\ref{tab:e2e_ugwc}.
-[investigate hunspell]
-Our proposed method outperform all existing solutions on the UGWC task. Interestingly, by grouping methods into 2-stage error correction (i.e. PyThaiNLP, Hunspell, and Ours) and end-to-end correction (i.e. Bi-GRU, and Copy-Augmented) we can see a clear trend that 2-stage methods performs significantly better on the Thai UGWC task. Error analysis shows that the end-to-end systems have trouble processing longer lines due to its eagerness to perform correction where none is required. [need example] [need to investigate for more reasons]
+The results on the Thai UGWC are shown in Table~\ref{tab:e2e_ugwc}. Our proposed method outperform all existing solutions on the UGWC task. With the best performing model using the Sentence Piece [REF] as the unit token. Interestingly, by grouping methods into 2-stage error correction (i.e. PyThaiNLP, Hunspell, and Ours) and end-to-end correction (i.e. Bi-GRU, and Copy-Augmented) we can see a clear trend that 2-stage methods performs significantly better on the Thai UGWC task. Error analysis shows that the end-to-end systems have trouble processing longer lines due to its eagerness to perform correction where none is required. [need examples]
 
 \begin{figure}
   \centering
@@ -155,8 +153,13 @@ Our proposed method outperform all existing solutions on the UGWC task. Interest
     \caption{Visualization of corrections performed by our system at varying detection sensitivity on the Thai UGWC test-set. The y-axis represent the number of altered segments of text by our system. Each of the segment is the results of the detection stage, and the correction stage. The detection can either be an exact detection of the actual error, a partial overlap with the actual error, or a false positive detection. Corrections made to the error segment can either produce a correct or an incorrect resulting text. Correct alteration of the text with either an exact detection (dark blue) or a overlapping detection (dark purple) results in the errors in the text being corrected. Incorrect alteration from false positive (light orange) detection results in errors being introduced to the text. While it is inconclusive to determine if the incorrect alteration of the text with either an exact detection (light blue) or a overlapping detection (light purple) will yeild a better or worse resulting text.}
 \end{figure}
 
-\subsection*{Detection Sensitivity}
-Evaluation of our proposed method at varying detection sensitivity are shown in Fig~\ref{fig:detect_threshold} and Table~\ref{tab:e2e_detect_sense}. Results show a stronger correlation between the $F_1$ detection score and end-to-end GLEU score than that of $F_{0.5}$ detection score. This is non-intuitive as error correction metrics such as M2 uses the $F_{0.5}$ to favor precision over recall [REF]. However, further investigation shows that the deterioration in performance is a result of reducted number of exact detection, where the detector is able to identify the exact boundaries of the erroneous text which leads to an increased number of error segments being uncorrectable by the correction stage [Need to ref some example].
+\subsection*{Token Error Detection Sensitivity}
+We further investigate into how the charateristic of the error detection stage affect the overall performance of the corrected output. The performance of our method at varying detection sensitivity are shown in Fig~\ref{fig:detect_threshold} and Table~\ref{tab:e2e_detect_sense}. Results show a stronger correlation between the $F_1$ detection score and end-to-end GLEU score than that of $F_{0.5}$ detection score. This is non-intuitive as error correction metrics such as M2 uses the $F_{0.5}$ to favor precision over recall [REF]. Further investigation shows that decreasing the deteciton sensitivity does not always result in corrections being applied to areas where it is confident. [Need examples] [Need old chart]
+
+% the deterioration in performance is a result of reducted number of exact detection, where the detector is able to identify the exact boundaries of the erroneous text which leads to an increased number of error segments being uncorrectable by the correction stage [Need to ref some example].
+
+\subsection*{Line-level Error detection}
+[TODO] [Rerun on Thai] [Add result without line-level to Conll]
 
 \begin{table}
   \caption{Evaluation of End-to-end error correction on the GEC Conll-2014 on various systems}
@@ -208,6 +211,6 @@ Evaluation of our proposed method at varying detection sensitivity are shown in 
 
 Our method was evaluated on both the full grammatical error correction (GEC) task and subsetting the Conll-2014 for measuring only misspelling corrections. The results are shown in Table~\ref{tab:e2e_conll_all} and Table~\ref{tab:e2e_conll_misspell}.
 
-Our method unsurprisingly performs very poorly on the GEC task. Although the GLEU may high but score itself is still lower than doing nothing.
+Our method unsurprisingly performs very poorly on the GEC task. With the GLEU score lower than doing nothing.
 
-Evaluating our model on the misspelling subset of the Conll-2014 shows a different story. Our model is able to perform compeitivly when compared to the BiGRU model on both M2 and GLEU score on the repacked testset. While the original M2 testset is not comparible as the majority of the corrections scored is from the pre-correction rather than the correction applied by the systems. This results in both of the systems scoring lower that the precorrected input as score detection from false-positive are over weighted by M2.
+Evaluating our model on the misspelling subset of the Conll-2014 shows a different story. Our model is able to perform compeitivly when compared to the BiGRU model on both M2 and GLEU score on both the original testset and the repacked testset.

@@ -2,24 +2,24 @@
 
 In this section, the procedures of each experiments are discussed in detail. The first sub-section outlines our evaluation metrics used for each of the experiments. The second sub-section outlines the experiments performed on the Thai UGWC dataset, which represents our main task, Thai Text Error Correction (TEC). The thrid sub-section outlines experiments performed on a publicly avalible dataset for English Grammatical Error Correction (GEC) task, which is a super task of TEC.
 
-% The first section outlines our initial experiment of adapting existing techniques found in the literatures relating to our task. The second section describes our proposed the two-stage error correction model. The third section investigates the effect of error detection of varying degree for sensitivity. The last section outlines our process of evaluating our model on the English GEC task.
-
 \subsection{Evaluation Criteria}
 
-Word-error-rate (WER) and the GLEU metric was chosen for the task of Thai TEC task. Our initial goal was to employ modern text correction metrics into the Thai TEC task. However, due to computational complexity of adopting M2, the most popular metric for GEC and GLEU's stronger correlation to human ranking of text fluency, only GLEU was chosen for Thai TEC.
+Word-error-rate (WER) and the GLEU metric was chosen for the task of Thai TEC task. Our initial goal was to employ modern text correction metrics into the Thai TEC task. However, M2 was dropped because of its slowness on longer bodies of text, which are quite common on our dataset and Thai language in general because of a lack of standard sentence tokenization.
 
-For the English GEC task, the typical M2 and GLEU is employed for comparibility with existing research.
+% However, due to computational complexity of adopting M2, the most popular metric for GEC and GLEU's stronger correlation to human ranking of text fluency, only GLEU was chosen for Thai TEC.
+
+For the English GEC task, the typical M2 and GLEU is employed for comparibility with the existing literature.
 
 \subsection{Thai UGWC TEC}
 
-On the Thai UGWC dataset, our method was evaluated against an industry standard tool (i.e. Hunspell), a well known Thai NLP toolchain (i.e. PyThaiNLP), and models from the English Grammatical Error correction task. We classify the approaches into 2 categories: 2-stage error correction, and end-to-end (E2E) error correction. Two 2-stage models were evaluated: Hunspell and PyThaiNLP. And Two E2E models were evaluated.
+On the Thai UGWC dataset, our method was evaluated against an industry standard tool (i.e. Hunspell), a well known Thai NLP toolchain (i.e. PyThaiNLP), and two models from the English Grammatical Error correction task. We categorize the approaches into 2 groups: 2-stage error correction, and end-to-end (E2E) error correction. Two 2-stage models were evaluated: Hunspell, and PyThaiNLP. And Two E2E models were evaluated: Bi-GRU, and Copy-Augmented Transformer.
 
 Hunspell is an dictionary-based industry standard spell checker, used in popular software such as LibreOffice, OpenOffice.org, Mozilla Firefox 3 \& Thunderbird, and Google Chrome [http://hunspell.github.io/]. Hunspell was evaluated using both the builtin Thai dictionary and a dictionary constructed from the UGWC training set. 
 
-PyThaiNLP is a popular tool-chain in the Thai NLP community based on state-of-the-art researches transfered from other languages. PyThaiNLP also has a text correction module which uses a two-stage approach.
+PyThaiNLP is a popular tool-chain in the Thai NLP community based on state-of-the-art researches transfered from other languages. PyThaiNLP has a text correction module which uses a two-stage approach.
 
-Two neural sequence-to-sequence models were evaluated, the Bi-directional GRU network, and the Copy-augmented transformer. The first model was chosen a typical baseline for neural seq2seq model and the second representing the state-of-the-art for English error correction research.
+Two neural sequence-to-sequence models were evaluated, the Bi-directional GRU network [REF], and the Copy-augmented transformer [REF]. The first model represents a typical baseline for neural seq2seq model while the second represents the current state-of-the-art for English error correction research.
 
 \subsection{English GEC}
 
-\subsubsection{Subseting the English GEC Task}
+The Conll-2014 task, was chosen as publicly avalible benchmark as at the time of research, no benchmark for Thai text correction exist. Due to the detailed nature of the annotations of this dataset, allows us to not only evaluate our model on the GEC task but also the spelling correction task as well. This is done by precorrecting other errors besides misspelling. We performed evaluation on both the M2 test file and a repacked version. The repacked testset is M2 testset with only misspelling corrections and the precorrected text as the input text. This step is necessarily as we later found out that the majority of the correction scores are from the pre-corrections rather than the correction applied by the correction systems as such any mistakes made by the system (false-positives) are over weighted by M2.
