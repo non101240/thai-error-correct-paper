@@ -1,15 +1,22 @@
 # Notes
 
-## Task: Re-evaluate the Thai Error correction results with WER
+## Task 01: Re-evaluate the Thai Error correction results with WER
 
 Status: In-progress
 
 Notes:
-TODO need to change the "range-based" inference into the resulting text.
+Summary
+1. Rerun evaluation routine which will create a copy of the "corrected resulting text"
+2. Verify that the results are consistent to the old results
+3. Run the WER code in `notebook/scripts/018-wer-evaluation/WER.ipynb` notebook
+4. Update GLEU results in Paper, GDrive
+5. Added WER results in Paper
 
-We are using the https://github.com/belambert/asr-evaluation as our toolset
+We are using WER code snippet from https://web.archive.org/web/20171215025927/http://progfruits.blogspot.com/2014/02/word-error-rate-wer-and-word.html
 
-### Sub-task: Map the results in the Paper back to the Google Drive sheet
+Note as we no longer have the BiGRU model we will have to retrain and re-evaluate that (TODO)
+
+### Sub-task 01: Map the results in the Paper back to the Google Drive sheet
 
 Status: Done
 
@@ -21,7 +28,7 @@ Google Sheets [Results as of 2019-06-12](https://docs.google.com/spreadsheets/d/
 
 **Copy-Augmented Transformer** results are on **"Correction" Sheet at the lower right** for "Copy-Augmented x0.75". As this is a fine tuned model to fit with our smaller dataset.
 
-### Sub-task: Map the results from the Google Drive sheet to the results in the computer
+### Sub-task 02: Map the results from the Google Drive sheet to the results in the computer
 
 Status: Done
 
@@ -64,7 +71,7 @@ Found Evaluation script at `experiments/004-getting-publication-again/scripts/co
 
 Found very useful readme at `text-cor-explore` `fairseq_gec/my/reports/on-cunlp.md`
 
-### Sub-task: Re-learn how to run our current results
+### Sub-task 03: Re-learn how to run our current results
 
 Status: Done
 
@@ -105,7 +112,7 @@ The Inference results are the files bellow
 * Ours (SentencePiece + Oracle Detection)
   * `experiments-result/004-getting-publication-again/correction/002-correction-hybrid-sentencepiece/infer/on-oracle-test.cor`
 
-## Backlog: Verify that the new report on Thai Dataset is consistent with the old results
+#### Sub-task 01: Verify that the new report on Thai Dataset is consistent with the old results
 
 Status: Done
 
@@ -113,46 +120,71 @@ Verify these files
 Compare the original evaluation to the re-run evaluations
 
 Verified
-experiments-result/004-getting-publication-again/correction/101-nothing/cunlp-v2-error/infer/on-test.report.json
-experiments-result/004-getting-publication-again/correction/101-nothing/cunlp-v2-error/infer/on-test.report.json.bak
+* experiments-result/004-getting-publication-again/correction/101-nothing/cunlp-v2-error/infer/on-test.report.json
+* experiments-result/004-getting-publication-again/correction/101-nothing/cunlp-v2-error/infer/on-test.report.json.bak
 
 Verified (Note there are some minor differences that can be ignored)
-experiments-result/004-getting-publication-again/correction/100-oracle/cunlp-v2-error/infer/on-test.report.json
-experiments-result/004-getting-publication-again/correction/100-oracle/cunlp-v2-error/infer/on-test.report.json.bak
+* experiments-result/004-getting-publication-again/correction/100-oracle/cunlp-v2-error/infer/on-test.report.json
+* experiments-result/004-getting-publication-again/correction/100-oracle/cunlp-v2-error/infer/on-test.report.json.bak
 
 Verified
-notebook/scripts/008-trainable-model-for-thai-error-correction/default/correction/on-test.report.json
-notebook/scripts/008-trainable-model-for-thai-error-correction/default/correction/on-test.report.json.bak
+* notebook/scripts/008-trainable-model-for-thai-error-correction/default/correction/on-test.report.json
+* notebook/scripts/008-trainable-model-for-thai-error-correction/default/correction/on-test.report.json.bak
 
 Verified
-experiments-result/004-getting-publication-again/correction/200-pythainlp/cunlp-v2-error/infer/on-test.report.json
-experiments-result/004-getting-publication-again/correction/200-pythainlp/cunlp-v2-error/infer/on-test.report.json.bak
+* experiments-result/004-getting-publication-again/correction/200-pythainlp/cunlp-v2-error/infer/on-test.report.json
+* experiments-result/004-getting-publication-again/correction/200-pythainlp/cunlp-v2-error/infer/on-test.report.json.bak
 
 Verified
-notebook/scripts/008-trainable-model-for-thai-error-correction/train-th1/correction/on-test.report.json
-notebook/scripts/008-trainable-model-for-thai-error-correction/train-th1/correction/on-test.report.json.bak
+* notebook/scripts/008-trainable-model-for-thai-error-correction/train-th1/correction/on-test.report.json
+* notebook/scripts/008-trainable-model-for-thai-error-correction/train-th1/correction/on-test.report.json.bak
 
 Verified
-experiments-result/004-getting-publication-again/correction/001-correction-hybrid/infer/on-test-t0.5.report.json
-experiments-result/004-getting-publication-again/correction/001-correction-hybrid/infer/on-test-t0.5.report.json.bak
+* experiments-result/004-getting-publication-again/correction/001-correction-hybrid/infer/on-test-t0.5.report.json
+* experiments-result/004-getting-publication-again/correction/001-correction-hybrid/infer/on-test-t0.5.report.json.bak
 
-BAD Not the same GLEU score
-experiments-result/004-getting-publication-again/correction/002-correction-hybrid-sentencepiece/infer/on-test-t0.5.report.json
-experiments-result/004-getting-publication-again/correction/002-correction-hybrid-sentencepiece/infer/on-test-t0.5.report.json.bak
+Verified (Note there are some minor differences that can be ignored, value is updated in paper and GDrive)
+* experiments-result/004-getting-publication-again/correction/002-correction-hybrid-sentencepiece/infer/on-test-t0.5.report.json
+* experiments-result/004-getting-publication-again/correction/002-correction-hybrid-sentencepiece/infer/on-test-t0.5.report.json.bak
 
 Verified
-experiments-result/004-getting-publication-again/correction/001-correction-hybrid/infer/on-oracle-test.report.json
-experiments-result/004-getting-publication-again/correction/001-correction-hybrid/infer/on-oracle-test.report.json.bak
+* experiments-result/004-getting-publication-again/correction/001-correction-hybrid/infer/on-oracle-test.report.json
+* experiments-result/004-getting-publication-again/correction/001-correction-hybrid/infer/on-oracle-test.report.json.bak
 
-BAD Not the same GLEU score as as 002-correction-hybrid-sentencepiece on-test-t0.5
-experiments-result/004-getting-publication-again/correction/002-correction-hybrid-sentencepiece/infer/on-oracle-test.report.json
-experiments-result/004-getting-publication-again/correction/002-correction-hybrid-sentencepiece/infer/on-oracle-test.report.json.bak
+Verified (Note there are some minor differences that can be ignored, value is updated in paper and GDrive)
+* experiments-result/004-getting-publication-again/correction/002-correction-hybrid-sentencepiece/infer/on-oracle-test.report.json
+* experiments-result/004-getting-publication-again/correction/002-correction-hybrid-sentencepiece/infer/on-oracle-test.report.json.bak
 
-The results for the sentencepiece models are from the incorrect tokenization
+~~The results for the sentencepiece models are from the incorrect tokenization.~~ The sentencepiece score are now consistent (mostly) with the old results.
 
-## Backlog: Find the root cause of the sentence model not producing the correct evaluation in the rerun
+#### Sub-task 02: Find the root cause of the sentence model not producing the correct evaluation in the rerun
 
+Status: Done
 
+There are 2 issues
+1. Minor differences in the GLEU score, this is because of fixing bugs in the test set. the minor differences can be ignore as it does not change the overall conclusion
+2. WER can not be compared directly because of the sentence-piece limitation of automatic text preprocessing which results in some " " (spaces) tokens being removed.
+  * We are ignoring this for now.
+
+### Sub-task 04: Evaluate inference using WER
+
+Status: Done
+
+WER code in `notebook/scripts/018-wer-evaluation/WER.ipynb` notebook
+
+## Backlog: Trian sentence level error detection model for Thai UGWC
+
+Status Pending
+
+## Backlog: Fine-tune sentence and word level detection at same time (Conll)
+
+Fine-tune word-level detection after sentence-level detection
+
+Status: Pending
+
+## Backlog: Re-evaluate everything with the sentence-piece like post-processing
+
+Status: Pending
 
 ## Backlog: Fine-tune the detection threshold using the validation
 
