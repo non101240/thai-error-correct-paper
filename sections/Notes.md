@@ -5,6 +5,9 @@
 Status: In-progress
 
 Notes:
+TODO need to change the "range-based" inference into the resulting text.
+
+We are using the https://github.com/belambert/asr-evaluation as our toolset
 
 ### Sub-task: Map the results in the Paper back to the Google Drive sheet
 
@@ -20,7 +23,7 @@ Google Sheets [Results as of 2019-06-12](https://docs.google.com/spreadsheets/d/
 
 ### Sub-task: Map the results from the Google Drive sheet to the results in the computer
 
-Status: In-progress
+Status: Done
 
 Notes:
 Results for 
@@ -44,7 +47,7 @@ Results for
   * `experiments-result/004-getting-publication-again/correction/002-correction-hybrid-sentencepiece/infer/on-test-t0.5.report.json`
 * Ours (Oracle Detection)
   * `experiments-result/004-getting-publication-again/correction/001-correction-hybrid/infer/on-oracle-test.report.json`
-* Ours (SentencePiece + Oracel Detection)
+* Ours (SentencePiece + Oracle Detection)
   * `experiments-result/004-getting-publication-again/correction/002-correction-hybrid-sentencepiece/infer/on-oracle-test.report.json`
 
 *Finding Hunspell*
@@ -63,11 +66,94 @@ Found very useful readme at `text-cor-explore` `fairseq_gec/my/reports/on-cunlp.
 
 ### Sub-task: Re-learn how to run our current results
 
-Status: In-progress
+Status: Done
 
 Notes:
+We backed up all the reports file `*.report.json` to `*.report.json.bak` to ensure consistency.
+
+To produce the inference files for models under `experiments-result/004-getting-publication-again/correction`,
+the evaluation script was modified and re-run. The evaluation script is at
+`experiments/004-getting-publication-again/scripts/correction/100-evaluation.fish`.
+
+For Hunspell models the existing evaluation script already produces the `.cor` file. The existing evaluation script
+is at `notebook/scripts/008-trainable-model-for-thai-error-correction/001-evaluate.fish`. We just re-run the script
+and the results are consistent.
+
+Copy-Augmented Transformer, the file is already there. Re-runing the evalution shows consistent results.
+
+The Inference results are the files bellow
+* Do nothing
+  * `experiments-result/004-getting-publication-again/correction/101-nothing/cunlp-v2-error/infer/on-test.cor`
+* Oracle
+  * `experiments-result/004-getting-publication-again/correction/100-oracle/cunlp-v2-error/infer/on-test.cor`
+* Hunspell (Off the shelf)
+  * `notebook/scripts/008-trainable-model-for-thai-error-correction/default/correction/on-test.cor`
+* PyThaiNLP
+  * `experiments-result/004-getting-publication-again/correction/200-pythainlp/cunlp-v2-error/infer/on-test.cor`
+* BiGRU
+  * **DOES NOT EXIST** The numbers are from old results
+* Copy-Augmented Transformer
+  * `text-cor-explore` `fairseq_gec/my/out/models/006-larger-than-003-model-retraining/infer/model_2_formatted_n_filled`
+* Hunspell (Trained)
+  * `notebook/scripts/008-trainable-model-for-thai-error-correction/train-th1/correction/on-test.cor`
+* Ours
+  * `experiments-result/004-getting-publication-again/correction/001-correction-hybrid/infer/on-test-t0.5.cor`
+* Ours (SentencePiece)
+  * `experiments-result/004-getting-publication-again/correction/002-correction-hybrid-sentencepiece/infer/on-test-t0.5.cor`
+* Ours (Oracle Detection)
+  * `experiments-result/004-getting-publication-again/correction/001-correction-hybrid/infer/on-oracle-test.cor`
+* Ours (SentencePiece + Oracle Detection)
+  * `experiments-result/004-getting-publication-again/correction/002-correction-hybrid-sentencepiece/infer/on-oracle-test.cor`
+
+## Backlog: Verify that the new report on Thai Dataset is consistent with the old results
+
+Status: Done
+
+Verify these files
+Compare the original evaluation to the re-run evaluations
+
+Verified
+experiments-result/004-getting-publication-again/correction/101-nothing/cunlp-v2-error/infer/on-test.report.json
+experiments-result/004-getting-publication-again/correction/101-nothing/cunlp-v2-error/infer/on-test.report.json.bak
+
+Verified (Note there are some minor differences that can be ignored)
+experiments-result/004-getting-publication-again/correction/100-oracle/cunlp-v2-error/infer/on-test.report.json
+experiments-result/004-getting-publication-again/correction/100-oracle/cunlp-v2-error/infer/on-test.report.json.bak
+
+Verified
+notebook/scripts/008-trainable-model-for-thai-error-correction/default/correction/on-test.report.json
+notebook/scripts/008-trainable-model-for-thai-error-correction/default/correction/on-test.report.json.bak
+
+Verified
+experiments-result/004-getting-publication-again/correction/200-pythainlp/cunlp-v2-error/infer/on-test.report.json
+experiments-result/004-getting-publication-again/correction/200-pythainlp/cunlp-v2-error/infer/on-test.report.json.bak
+
+Verified
+notebook/scripts/008-trainable-model-for-thai-error-correction/train-th1/correction/on-test.report.json
+notebook/scripts/008-trainable-model-for-thai-error-correction/train-th1/correction/on-test.report.json.bak
+
+Verified
+experiments-result/004-getting-publication-again/correction/001-correction-hybrid/infer/on-test-t0.5.report.json
+experiments-result/004-getting-publication-again/correction/001-correction-hybrid/infer/on-test-t0.5.report.json.bak
+
+BAD Not the same GLEU score
+experiments-result/004-getting-publication-again/correction/002-correction-hybrid-sentencepiece/infer/on-test-t0.5.report.json
+experiments-result/004-getting-publication-again/correction/002-correction-hybrid-sentencepiece/infer/on-test-t0.5.report.json.bak
+
+Verified
+experiments-result/004-getting-publication-again/correction/001-correction-hybrid/infer/on-oracle-test.report.json
+experiments-result/004-getting-publication-again/correction/001-correction-hybrid/infer/on-oracle-test.report.json.bak
+
+BAD Not the same GLEU score as as 002-correction-hybrid-sentencepiece on-test-t0.5
+experiments-result/004-getting-publication-again/correction/002-correction-hybrid-sentencepiece/infer/on-oracle-test.report.json
+experiments-result/004-getting-publication-again/correction/002-correction-hybrid-sentencepiece/infer/on-oracle-test.report.json.bak
+
+The results for the sentencepiece models are from the incorrect tokenization
+
+## Backlog: Find the root cause of the sentence model not producing the correct evaluation in the rerun
 
 
-## Backlog: The results for Ours (SentencePiece) on Thai social is not the best
+
+## Backlog: Fine-tune the detection threshold using the validation
 
 Info: Currently, the "Ours (SentencePiece) 2-Stage 0.9326" is not the best score according to Google Sheet "Multi-Th SentencePiece" Sheet. As the results is the score from using "detection threshold" of "0.5". However, running against the test set shows that "0.6" is better. But, we cannot directly use that unless we verify that we can obtain the "0.6" from the validation set.

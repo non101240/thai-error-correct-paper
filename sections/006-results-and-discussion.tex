@@ -3,28 +3,28 @@
 
 \begin{table}
   \caption{Evaluation of End-to-end error correction on Thai social data on various systems}
-  \begin{tabular}{lcc}
+  \begin{tabular}{lccc}
     \toprule
-    Model & Type & GLEU \\
+    Model & Type & GLEU & WER \\
     \midrule
-    Do nothing & - & 0.8845 \\
-    Oracle & - & 1.0000 \\
+    Do nothing & - & 0.8845 & 0.0377 \\
+    Oracle & - & 1.0000 & 0.0000 \\
     \midrule
     \textbf{Off the shelf} & \\
-    Hunspell & 2-Stage & 0.8267 \\
-    PyThaiNLP & 2-Stage & 0.8612 \\
+    Hunspell & 2-Stage & 0.8267 & 0.0811 \\
+    PyThaiNLP & 2-Stage & 0.8612 & 0.0558 \\
     \midrule
     \textbf{Trained} & \\
-    BiGRU & End-to-End & 0.5486 \\
+    BiGRU & End-to-End & 0.5486 & TODO \\
     % Copy-Augmented Transformer (not tuned)  & End-to-End & 0.6914 \\
-    Copy-Augmented Transformer & End-to-End & 0.7581 \\
-    Hunspell & 2-Stage & 0.8598 \\
+    Copy-Augmented Transformer & End-to-End & 0.7581 & TODO \\
+    Hunspell & 2-Stage & 0.8598 & 0.0557 \\
     \midrule
-    Ours & 2-Stage & 0.9274 \\
-    Ours (SentencePiece) & 2-Stage & \textbf{0.9326} \\
+    Ours & 2-Stage & 0.9274 & 0.0342 \\
+    Ours (SentencePiece) & 2-Stage & \textbf{0.9326} & 0.0943 TODO \\
     % Ours (SentencePiece + Tuned Detection) & 2-Stage & 0.9329 \\
-    Ours (Oracle Detection) & 2-Stage & 0.9490 \\
-    Ours (SentencePiece + Oracle Detection) & 2-Stage & 0.9533 \\
+    Ours (Oracle Detection) & 2-Stage & 0.9490 & 0.0293 \\
+    Ours (SentencePiece + Oracle Detection) & 2-Stage & 0.9533 & 0.0878 TODO \\
     \bottomrule
   \end{tabular}
   \label{tab:e2e_ugwc}
