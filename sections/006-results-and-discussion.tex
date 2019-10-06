@@ -3,6 +3,7 @@
 
 \begin{table}
   \caption{Evaluation of End-to-end error correction on Thai social data on various systems}
+  \begin{threeparttable}
   \begin{tabular}{lccc}
     \toprule
     Model & Type & GLEU & WER \\
@@ -15,7 +16,7 @@
     PyThaiNLP & 2-Stage & 0.8612 & 0.0558 \\
     \midrule
     \textbf{Trained} & \\
-    BiGRU & End-to-End & 0.5486 & TODO \\
+    BiGRU & End-to-End & 0.5486* & TODO* \\
     % Copy-Augmented Transformer (not tuned)  & End-to-End & 0.6914 \\
     Copy-Augmented Transformer & End-to-End & 0.7581 & TODO \\
     Hunspell & 2-Stage & 0.8598 & 0.0557 \\
@@ -27,6 +28,10 @@
     Ours (SentencePiece + Oracle Detection) & 2-Stage & 0.9536* & 0.0265* \\
     \bottomrule
   \end{tabular}
+  \begin{tablenotes}\footnotesize
+    \item[*] denote scores calculated on the resulting SentencePiece output re-tokenized as words as oppose to evaluating against the original text. This is to avoid the metric from penalizing SentencePiece text normalization.
+  \end{tablenotes}
+  \end{threeparttable}
   \label{tab:e2e_ugwc}
 \end{table}
 
