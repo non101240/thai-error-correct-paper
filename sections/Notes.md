@@ -174,7 +174,7 @@ WER code in `notebook/scripts/018-wer-evaluation/WER.ipynb` notebook
 
 ## Backlog: Trian sentence level error detection model for Thai UGWC
 
-Status Pending
+Status: Pending
 
 ## Backlog: Fine-tune sentence and word level detection at same time (Conll)
 
